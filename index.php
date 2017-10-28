@@ -2,9 +2,9 @@
 
 require_once __DIR__.'/vendor/autoload.php';
 
-const CLIENT_ID = '933883680269-1c16np4neur9st4u0tcvnthddk2drvou.apps.googleusercontent.com';
-const CLIENT_SECRET = 'cAcxFXQRIVWML0TtvJuFzr_D';
-const REDIRECT_URI = 'http://localhost/task/index.php';
+const CLIENT_ID = 'Enter your Client ID here';
+const CLIENT_SECRET = 'Enter your Secret ID here';
+const REDIRECT_URI = 'Enter your path here';
 
 
 session_start();
