@@ -29,25 +29,11 @@ if($conn)
 			array_push($result[$val['C1']]['C4'], $C4);
 		}
 	}
-		
+	
+	$result = array_values($result);
+
 	$json_data = json_encode($result,JSON_NUMERIC_CHECK|JSON_PRETTY_PRINT);
 	echo "<pre>" . $json_data . "</pre>";
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }
 else
@@ -67,3 +53,4 @@ else
 
 
 ?>
+
