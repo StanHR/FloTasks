@@ -13,22 +13,25 @@ $count = 0;
 if($conn)
 {
 	echo "Connection Established. Moving Ahead...<br><br>";
-	echo "{ <br> { <br>";
-	$sql = "SELECT c1 as 'c1',c2 as 'c2',GROUP_CONCAT(CONCAT('&emsp;&emsp;{<br>&emsp;&emsp;&emsp;c3 : ', c3),CONCAT('<br>&emsp;&emsp;&emsp;c4 : ',c4),CONCAT('<br>&emsp;&emsp;}<br>')) as '<br>c4' FROM json_wala_table GROUP BY c1,c2" ; 
-	$result = $conn->query($sql);
-	while($val = $result->fetch_assoc())
-	{
-		echo json_encode($val);
-		echo "<br>";
+	$sql = mysqli_query($conn, "SELECT * from json_wala_table ");
+
+	while ($val = mysqli_fetch_array($sql,MYSQLI_ASSOC))
+	{	
+		if(empty($result[$val['C1']]))
+		{
+			$result[$val['C1']] = array('C1'=>$val['C1'],'C2'=>$val['C2']);
+			$C4 = array('C3'=>$val['C3'],'C4'=>$val['C4']);
+			$result[$val['C1']]['C4'][] = $C4;
+		}
+		else
+		{
+			$C4 = array('C3'=>$val['C3'],'C4'=>$val['C4']);
+			array_push($result[$val['C1']]['C4'], $C4);
+		}
 	}
-
-	echo "} <br> }";
-
-
-
-
-
-
+		
+	$json_data = json_encode($result,JSON_NUMERIC_CHECK|JSON_PRETTY_PRINT);
+	echo "<pre>" . $json_data . "</pre>";
 
 
 
